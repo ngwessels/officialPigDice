@@ -1,78 +1,282 @@
+<!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/scripts.js"></script>
 
+    <title>Oink Roll</title>
+  </head>
+    <body>
+      <div class = "container">
+        <div class = "jumbotron">
+          <h1>Oink roll</h1>
+          <h3>The game of life</h3>
+        </div>
+          <div id="startGame">
+            <button type="button" class="btn btn-primary btn-lg btn-block" id="startGameButton" onclick="hideStartGame()">Start Game</button>
+          </div>
 
-<!--   <button id='comeOutButton' class='roll-button'>Come Out ROLL</button> -->
-<button id='pointRollButton' class='roll-button'>POINT ROLL</button>
+          <div id="menu">
+            <div class="row">
+              <div class="modeLabel col-md-6">
+                <label for="PVP">Player Versus Player</label>
+                <button type="button" class="btn btn-primary btn-lg btn-block mode" id="PVP" onclick="pvpMenu()">P-V-P</button>
+              </div>
+              <div class="modeLabel col-md-6">
+                <label for="P-V-AI">Player Versus AI</label>
+                <button type="button" class="btn btn-primary btn-lg btn-block mode" id="PVAI" onclick="pvpAI()">P-V-AI</button>
+              </div>
+              <div id="gameTitle"><h2>Game Info</h2>
+                <p id="gameInfo">Each turn, a player repeatedly rolls a die until either a 1 is rolled or the player decides to "hold":
 
+                If the player rolls a 1, they score nothing and it becomes the next player's turn.
+                If the player rolls any other number, it is added to their turn total and the player's turn continues.
+                If a player chooses to "hold", their turn total is added to their score, and it becomes the next player's turn.
+                The first player to score 100 or more points wins.
 
-<h2 id="theRoll"></h2>
+                For example, the first player, Anne, begins a turn with a roll of 5. Anne could hold and score 5 points, but chooses to roll again. Anne rolls a 2, and could hold with a turn total of 7 points, but chooses to roll again. Anne rolls a 1, and must end her turn without scoring. The next player, Bob, rolls the sequence 4-5-3-5-5, after which he chooses to hold, and adds his turn total of 22 points to his score.</p>
+              </div>
+            </div>
+          </div>
 
-<div class="dice-board">
+          <div id="pvpMenu">
+            <form id="playerNames">
+              <div class="form-group">
+                <label for="players1">Player 1 Name:</label>
+                <input type="text" class="form-control" id="players1" required>
+                <label for="players2">Player 2 Name:</label>
+                <input type="text" class="form-control" id="players2" required>
+              </div>
+              <button id="pvpStart" type="submit" name="btn">Play!</button>
+            </form>
+          </div>
 
+          <div id="pvaiMenu">
+            <form id="playerName">
+              <div class="form-group">
+                <label for="player1">Player Name:</label>
+                <input type="text" class="form-control" id=player1 required>
+                <label for="difficulty">Pick AI difficulty</label>
+                <select class="form-control" id="difficulty">
+                  <option>Easy</option>
+                  <option>Medium</option>
+                  <option>Hard</option>
+                </select>
+              </div>
+              <button id="pvaiStart" type="submit">Play!</button>
+            </form>
+          </div>
 
-  <div class="container-dice">
-
-
-    <div id='dice1' class="dice dice-one">
-      <div id="dice-one-side-one" class='side one'>
-        <div class="divot one-1"></div>
+          <div id="game">
+            <div class = "row" id="topRow">
+              <div class = "col-md-2">
+                <div class = "player-one">
+                  <p><span id="leftPlayer"></span></p>
+                </div>
+              </div>
+              <div class = "col-md-8">
+                <p id="diceHolder"> Dice holder </p>
+              </div>
+              <div class = "col-md-2">
+                <div class = "player-two">
+                  <p><span id="rightPlayer"></span></p>
+                </div>
+              </div>
+            </div>
+            <div class = "row" id="midRow">
+              <div class = "col-md-2">
+                <button id="leftHold" type="button" class="btn btn-primary btn-lg btn-block holdButton" onclick="leftHold()">Hold</button>
+              </div>
+              <div class = "col-md-8" id="diceSpace">
+                <p> dice holder</p>
+                <div id="diceRoll"></div>
+                  <div class="dice-board">
+                    <div class="container-dice">
+                      <div id='dice1' class="dice dice-one">
+                        <div id="dice-one-side-one" class='side one'>
+                          <div class="divot one-1"></div>
+                        </div>
+                        <div id="dice-one-side-two" class='side two'>
+                          <div class="divot two-1"></div>
+                          <div class="divot two-2"></div>
+                        </div>
+                        <div id="dice-one-side-three" class='side three'>
+                          <div class="divot three-1"></div>
+                          <div class="divot three-2"></div>
+                          <div class="divot three-3"></div>
+                        </div>
+                        <div id="dice-one-side-four" class='side four'>
+                          <div class="divot four-1"></div>
+                          <div class="divot four-2"></div>
+                          <div class="divot four-3"></div>
+                          <div class="divot four-4"></div>
+                        </div>
+                        <div id="dice-one-side-five" class='side five'>
+                          <div class="divot five-1"></div>
+                          <div class="divot five-2"></div>
+                          <div class="divot five-3"></div>
+                          <div class="divot five-4"></div>
+                          <div class="divot five-5"></div>
+                        </div>
+                        <div id="dice-one-side-six" class='side six'>
+                          <div class="divot six-1"></div>
+                          <div class="divot six-2"></div>
+                          <div class="divot six-3"></div>
+                          <div class="divot six-4"></div>
+                          <div class="divot six-5"></div>
+                          <div class="divot six-6"></div>
+                        </div>
+                      </div>
+                    </div> <!-- END container-dice -->
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-lg" onclick="gamePlay()" id="rollButton">Roll!</button>
+                </div>
+              <div class = "col-md-2">
+                  <button id="rightHold" type="button" class="btn btn-primary btn-lg btn-block holdButton" onclick="rightHold()">Hold</button>
+              </div>
+            </div>
+            <div class="row" id="bottomRow">
+              <div class="col-md-2">
+                <span id="leftScore"></span>
+              </div>
+              <div class="col-md-8">
+                <ul id="lastRolls"></ul>
+              </div>
+              <div class="col-md-2">
+                <span id="rightScore"></span>
+              </div>
+            </div>
+          </div>
       </div>
-      <div id="dice-one-side-two" class='side two'>
-        <div class="divot two-1"></div>
-        <div class="divot two-2"></div>
-      </div>
-      <div id="dice-one-side-three" class='side three'>
-        <div class="divot three-1"></div>
-        <div class="divot three-2"></div>
-        <div class="divot three-3"></div>
-      </div>
-      <div id="dice-one-side-four" class='side four'>
-        <div class="divot four-1"></div>
-        <div class="divot four-2"></div>
-        <div class="divot four-3"></div>
-        <div class="divot four-4"></div>
-      </div>
-      <div id="dice-one-side-five" class='side five'>
-        <div class="divot five-1"></div>
-        <div class="divot five-2"></div>
-        <div class="divot five-3"></div>
-        <div class="divot five-4"></div>
-        <div class="divot five-5"></div>
-      </div>
-      <div id="dice-one-side-six" class='side six'>
-        <div class="divot six-1"></div>
-        <div class="divot six-2"></div>
-        <div class="divot six-3"></div>
-        <div class="divot six-4"></div>
-        <div class="divot six-5"></div>
-        <div class="divot six-6"></div>
-      </div>
-    </div>
-
-
-  </div> <!-- END container-dice -->
-
-
-  <div class="container-dice">
-
-
-
-      </div>
-    </div>
-
-
-    </div>  <!-- END container-dice 2 -->
-
-
-</div> <!-- END dice-board -->
-
+    </body>
 </html>
 
-
-
-
-
 <style>
+.jumbotron {
+  text-align: center;
+  background-image: url(../img/dice.gif);
+  background-size: cover;
+  color:hotpink;
+}
+#pvaiMenu {
+  display: none;
+}
+#bottomRow{
+  height: 100px;
+}
+#diceHolder {
+  font-size: 30px;
+}
+
+#startGameButton {
+  background-color: black;
+  color:hotpink;
+  display: block;
+}
+
+#leftHold {
+  background-color: black;
+  color:hotpink;
+  display: none;
+}
+
+#rightHold{
+  background-color: black;
+  color:hotpink;
+  display: none;
+}
+#PVP {
+  background-color: black;
+  color:hotpink;
+}
+
+#PVAI{
+  background-color: black;
+  color:hotpink;
+}
+
+#menu {
+  display: none;
+}
+#pvpMenu {
+  display: none;
+}
+
+#gameTitle {
+  text-align: center;
+  margin-top: 5%
+}
+.mode {
+  height: 90px;
+}
+
+#gameInfo {
+  text-align: center;
+  margin-top: 2%
+}
+
+#game {
+  display: none;
+}
+
+.modeLabel {
+  text-align: center;
+}
+.col-md-2 {
+  border: auto;
+  border-style: solid;
+  text-align: center;
+}
+
+.holdButton {
+  height: 100%;
+}
+
+.col-md-8 {
+  border: auto;
+  border-style: solid;
+  text-align: center;
+
+}
+
+#topRow {
+
+
+}
+
+#midRow {
+  height: 700px;
+}
+
+#bottomRow {
+
+
+}
+ul {
+  list-style-type: none;
+}
+
+
+#diceSpace {
+  display: block;
+  margin: 0 auto;
+}
+#dice1 {
+  right: 100px;
+}
+
+#rollButton {
+  position: fixed;
+  top: 70%;
+  right: 47.5%;
+  background-color: black;
+  color:hotpink;
+
+}
+
 
 /*########## DICE THINGS ###########*/
 .container-dice {
@@ -99,11 +303,10 @@ background: #000; }
 .dice-one {
 margin-left: 150px; }
 
-.dice-two {
-margin-left: 150px; }
+
 
 .side {
-background-color: rgba(255, 255, 204, 0.97);
+background-color: blue;
 position: absolute;
 width: 200px;
 height: 200px;
@@ -173,44 +376,24 @@ left: 20%; }
 .six-5 {
 top: 50%;
 left: 80%; }
-
-
-
 </style>
 
-
-
-
 <script>
-// Dice Roll
-
-// var winCount        = 0;
-// var lossCount       = 0;
-// var gameCount       = 0;
-// var thePoint        = 0;
-
-// var cash         = 100;
-// var betInput     = document.getElementById('betField').value;
-// var bet          = parseInt(betInput);
 
 var elDiceOne       = document.getElementById('dice1');
 var elDiceTwo       = document.getElementById('dice2');
 var elComeOut       = document.getElementById('comeOutButton');
-var elPointRoll     = document.getElementById('pointRollButton');
-// var elWinOrLoss     = document.getElementById('winOrLoss');
-// var elCrapsWins     = document.getElementById('crapWins');
-// var elCrapsLosses   = document.getElementById('crapLosses');
+var elPointRoll     = document.getElementById('rollButton');
+
 
 // elComeOut.onclick   = function () {comeOutRoll();};
-
-elPointRoll.onclick = function () {pointRoll();};
 
 // Come Out Roll Function
 function comeOutRoll() {
 
 // Initial dice variables
-var diceOne   = Math.floor((Math.random() * 6) + 1);
 // var diceTwo   = Math.floor((Math.random() * 6) + 1);
+var total = rollDice1();
 var rollTotal = diceOne + diceTwo;
 
 console.log(rollTotal + ' ' + diceOne + ' ' + diceTwo);
@@ -225,49 +408,15 @@ for (var i = 1; i <= 6; i++) {
   }
 }
 
-// for (var k = 1; k <= 6; k++) {
-//   elDiceTwo.classList.remove('show-' + k);
-//   if (diceTwo === k) {
-//     elDiceTwo.classList.add('show-' + k);
-//   }
-// }
-
-// if rollTotal = 7 or 11; Player wins
-// if (rollTotal === 7 || rollTotal === 11) {
-//   console.log('You won!');
-//   winCount++;
-//   gameCount++;
-//   elWinOrLoss.innerHTML = 'You Won!';
-
-  // cash += betField;
-// } else if (rollTotal === 2 || rollTotal === 3 || rollTotal === 12) {
-//   console.log('You lost!');
-//   lossCount++;
-//   gameCount++;
-//   elWinOrLoss.innerHTML = 'LOSER!';
-
-  // cash -= betField;
-// } else {
-  // sets the point and changes button display
-  // thePoint = rollTotal;
-  // elWinOrLoss.innerHTML = 'Roll the Point!';
-
-  //  sets value for the point and changes the button displayed
-//   document.getElementById('theRoll').innerHTML = 'Roll a ' + thePoint + ' to win';
-//   elComeOut.style.display = 'none';
-//   elPointRoll.style.display = 'block';
-// }
 
 setTimeout(winLossCount(), 1500);
 }// END Come out roll function
 
 //POINT ROLL FUNCTION
-function pointRoll() {
+function pointRoll(diceOne) {
 
 // sets dice variables
-var diceOne   = Math.floor((Math.random() * 6) + 1);
 // var diceTwo   = Math.floor((Math.random() * 6) + 1);
-var rollTotal = diceOne;
 
 //Dice reset and display
 
@@ -278,54 +427,282 @@ for (var i = 1; i <= 6; i++) {
   }
 }
 }
-// for (var k = 1; k <= 6; k++) {
-//   elDiceTwo.classList.remove('show-' + k);
-//   if (diceTwo === k) {
-//     elDiceTwo.classList.add('show-' + k);
-//   }
-// }
 
-// if player rolls a 7, player loses
-// if (rollTotal === 7) {
-//   console.log('LOSER');
-//   thePoint = 0;
-//   lossCount++;
-//   gameCount++;
-//   elWinOrLoss.innerHTML = 'Loser!';
 
-  // cash -= betField;
-//     elComeOut.style.display = 'block';
-//     elPointRoll.style.display = 'none';
 
-//   } else if (rollTotal === thePoint) {
-  // If player rolls the point; player wins
 
-  // console.log('you won!');
-  // winCount++; // updates win count
-  // gameCount++;
-  // elWinOrLoss.innerHTML = 'You Won!';
 
-  // cash += betField;
-  // thePoint = 0;// resests the point
 
-  // Resets buttons
-//     elComeOut.style.display   = 'block';
-//     elPointRoll.style.display = 'none';
 
-//   } else {
-  // Roll again if no winner
 
-//     console.log('roll again');
-//   }
+function mainPVP() {
+  this.playersArray = [];
+  this.currentId = 0;
+}
 
-//   setTimeout(winLossCount(), 1500);
-// } // END POINT ROLL FUNCTION
+function mainPVAI() {
+  this.playerArray = [];
+  this.currentId = 0;
+}
 
-// function winLossCount() {
-// Update win and loss count
-// elCrapsLosses.innerHTML = 'Losses: ' + lossCount;
-// elCrapsWins.innerHTML   = 'Wins: ' + winCount;
 
-// document.getElementById('score').innerHTML = 'CASH:' + cash;
-// }
+mainPVP.prototype.findPlayers = function(id) {
+  for (var i = 0; i < this.playersArray.length; i++) {
+    if (this.playersArray[i]) {
+      if (this.playersArray[i].id == id) {
+        return this.playersArray[i];
+      }
+    }
+  };
+  return false;
+}
+
+mainPVP.prototype.updateScore = function(score, player) {
+  if (player == 0) {
+    this.playersArray.player1Score = score;
+  }
+  if (player == 1) {
+    this.playersArray.player2Score = score;
+  }
+}
+
+
+mainPVP.prototype.PVP = function(players) {
+  players.id = this.assignId();
+  this.playersArray.push(players);
+
+
+}
+
+mainPVP.prototype.assignId = function() {
+  this.currentId += 1;
+  return this.currentId;
+}
+
+
+function hideStartGame() {
+  $("#startGame").toggle();
+  $("#menu").toggle();
+}
+
+function pvpMenu() {
+  $("#menu").toggle();
+  $("#pvpMenu").toggle();
+
+}
+
+
+function pvpAI() {
+  $("#menu").toggle();
+  $("#pvaiMenu").toggle();
+
+}
+
+function addPlayers(firstPlayer, secondPlayer, player1Score, player2Score) {
+  this.firstPlayer = firstPlayer,
+  this.secondPlayer = secondPlayer,
+  this.player1Score = player1Score,
+  this.player2Score = player2Score
+
+}
+
+function addPlayer(firstPlayer, difficulty) {
+  this.firstPlayer = firstPlayer,
+  this.difficulty = difficulty
+
+}
+
+
+function rollDice1() {
+  return Math.floor((Math.random() * 6 + 1));
+
+}
+
+mainPVP.prototype.playerRoll = function(roll, player, currentPlayer) {
+  if (player == 0){
+    if(roll == 1){
+      currentPlayer.player1Score = 0;
+      $("#leftScore").text(currentPlayer.player1Score)
+      leftHold();
+    }else if(roll != 1){
+      var score = currentPlayer.player1Score;
+      currentPlayer.player1Score = score + roll;
+      score = currentPlayer.player1Score;
+      $("#leftScore").text(currentPlayer.player1Score);
+    }
+  }
+  if (player == 1){
+    if(roll == 1){
+      currentPlayer.player2Score = 0;
+      $("#rightScore").text(currentPlayer.player2Score)
+      rightHold();
+    }else if(roll != 1){
+      var score = currentPlayer.player2Score;
+      currentPlayer.player2Score = score + roll;
+      score = currentPlayer.player2Score;
+      $("#rightScore").text(currentPlayer.player2Score);
+    }
+  }
+}
+var currentPlayer = 0;
+
+
+var MainPVP = new mainPVP();
+var MainPVAI = new mainPVAI()
+
+function leftHold() {
+  currentPlayer = 1;
+  $("#leftHold").hide();
+  $("#rightHold").show();
+}
+
+function rightHold() {
+  currentPlayer = 0;
+  $("#leftHold").show();
+  $("#rightHold").hide();
+}
+
+var previousRolls = [];
+function showPreviousRolls(roll, string) {
+  var length = previousRolls.length;
+  if(1 == roll) {
+    $("#lastRolls").append("<li>" + string + '<img src="img/side1.png" height="60px" width="60px">' + "</li>");
+    string = string + ' <img src=img/side1.png height=60px width=60px>';
+  }
+  if(2 == roll) {
+    $("#lastRolls").append("<li>" + string + '<img src="img/side2.png" height="60px" width="60px">' + "</li>");
+    string = string + ' <img src=img/side2.png height=60px width=60px>';
+  }
+  if(3 == roll) {
+    $("#lastRolls").append("<li>" + string + '<img src="img/side3.png" height="60px" width="60px">' + "</li>");
+    string = string + ' <img src=img/side3.png height=60px width=60px>';
+
+  }
+  if(4 == roll) {
+    $("#lastRolls").append("<li>" + string + '<img src="img/side4.png" height="60px" width="60px">' + "</li>");
+    string = string + ' <img src=img/side4.png height=60px width=60px>';
+  }
+  if(5 == roll) {
+    $("#lastRolls").append("<li>" + string + '<img src="img/side5.png" height="60px" width="60px">' + "</li>");
+    string = string + ' <img src=img/side5.png height=60px width=60px>';
+  }
+  if(6 == roll) {
+    $("#lastRolls").append("<li>" + string + '<img src="img/side6.png" height="60px" width="60px">' + "</li>");
+    string = string + ' <img src=img/side6.png height=60px width=60px>';
+  }
+  return string;
+}
+
+
+
+function removeFirst(array) {
+
+  if(array[0] == "" || array[0] == "undefined") {
+    array.splice(0 ,1);
+  }
+  var newArray;
+  for(var i = 0; i < 4; i++) {
+    newArray = array.shift();
+  }
+  array = array.toString();
+  for(var a = 0; a < array.length; a++) {
+    array = array.replace(",", " ");
+  }
+  return array;
+}
+
+var string = [];
+function gamePlay(){
+
+  var stringArray;
+  var winScore = 100;
+  var player1Score = 0;
+  var player2Score = 0;
+  var a = 0;
+  var currentPlayerInfo = MainPVP.findPlayers(1);
+  player1Score = currentPlayerInfo.player1Score;
+  player2Score = currentPlayerInfo.player2Score;
+  if(player1Score >= winScore || player2Score >= winScore) {
+
+    $("#leftHold").hide();
+    $("#rightHold").hide();
+    $("#rollButton").hide();
+  }
+  if (player1Score < winScore && player2Score < winScore) {
+    if(a == 6) {
+      a = 0;
+    }
+    if(currentPlayer == 0) {
+      $("#lastRolls").text("");
+      var diceRoll = rollDice1();
+      pointRoll(diceRoll);
+      $("#diceRoll").text(diceRoll);
+      MainPVP.playerRoll(diceRoll, currentPlayer, currentPlayerInfo);
+      string = showPreviousRolls(diceRoll, string);
+      var stringArray = string.split(" ");
+      var length = stringArray.length
+      if (stringArray.length > 23) {
+        string = removeFirst(stringArray);
+      }
+
+      a++;
+
+    }else if(currentPlayer == 1) {
+      $("#lastRolls").text("");
+      var diceRoll = rollDice1();
+      pointRoll(diceRoll);
+      $("#diceRoll").text(diceRoll);
+      MainPVP.playerRoll(diceRoll, currentPlayer, currentPlayerInfo);
+      string = showPreviousRolls(diceRoll, string);
+      var stringArray = string.split(" ");
+      var length = stringArray.length;
+      if (stringArray.length > 23) {
+        string = removeFirst(stringArray);
+      }
+      a++;
+
+    }
+  }
+  player1Score = currentPlayerInfo.player1Score;
+  player2Score = currentPlayerInfo.player2Score;
+  if(player1Score >= winScore || player2Score >= winScore) {
+    $("#leftHold").hide();
+    $("#rightHold").hide();
+    $("#rollButton").hide();
+  }
+
+}
+
+
+
+
+$(document).ready(function() {
+  $("form#playerNames").submit(function(event) {
+    event.preventDefault();
+    var player1Score = 0;
+    var player2Score = 0;
+    var player1 = $("input#players1").val();
+    var player2 = $("input#players2").val();
+    $("#pvpMenu").toggle();
+    $("#game").toggle();
+    $("#leftPlayer").text(player1);
+    $("#rightPlayer").text(player2);
+    var players = new addPlayers(player1, player2, player1Score, player2Score);
+    $("#leftHold").show();
+
+    MainPVP.PVP(players);
+
+  });
+  $("form#playerName").submit(function(evnet) {
+    event.preventDefault();
+    var player = $("input#player1").val();
+    var difficulty = $("#difficulty").val();
+    $("#pvaiMenu").toggle();
+    $("#game").toggle();
+    $("#rightPlayer").text(player);
+    $("#leftPlayer").text(difficulty + " AI");
+
+  });
+});
+
 </script>
