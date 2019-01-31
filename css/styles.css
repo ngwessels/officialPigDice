@@ -1,0 +1,241 @@
+.jumbotron {
+  text-align: center;
+  background-image: url(../img/dice.gif);
+  background-size: cover;
+  color:hotpink;
+}
+#pvaiMenu {
+  display: none;
+}
+#bottomRow{
+  height: 100px;
+}
+#diceHolder {
+  font-size: 30px;
+}
+
+#startGameButton {
+  background-color: black;
+  color:hotpink;
+  display: block;
+}
+
+#leftHold {
+  background-color: black;
+  color:hotpink;
+  display: none;
+}
+
+#rightHold{
+  background-color: black;
+  color:hotpink;
+  display: none;
+}
+#PVP {
+  background-color: black;
+  color:hotpink;
+}
+
+#PVAI{
+  background-color: black;
+  color:hotpink;
+}
+
+#menu {
+  display: none;
+}
+#pvpMenu {
+  display: none;
+}
+
+#gameTitle {
+  text-align: center;
+  margin-top: 5%
+}
+.mode {
+  height: 90px;
+}
+
+#gameInfo {
+  text-align: center;
+  margin-top: 2%
+}
+
+#game {
+  display: none;
+}
+
+.modeLabel {
+  text-align: center;
+}
+.col-md-2 {
+  border: auto;
+  border-style: solid;
+  text-align: center;
+}
+
+.holdButton {
+  height: 100%;
+}
+
+.col-md-8 {
+  border: auto;
+  border-style: solid;
+  text-align: center;
+
+}
+
+#topRow {
+
+
+}
+
+#midRow {
+  height: 700px;
+}
+
+#bottomRow {
+
+
+}
+ul {
+  list-style-type: none;
+}
+
+
+#diceSpace {
+  display: block;
+  margin: 0 auto;
+}
+#dice1 {
+  right: 100px;
+}
+
+#rollButton {
+  position: fixed;
+  top: 70%;
+  right: 47.5%;
+  background-color: black;
+  color:hotpink;
+
+}
+
+
+/*########## DICE THINGS ###########*/
+.container-dice {
+display: inline-block;
+margin-top: 100px;
+width: 300px;
+margin: 50px auto 0 auto; }
+
+.dice {
+position: relative;
+width: 200px;
+height: 200px;
+transform-style: preserve-3d;
+transition: transform 3s; }
+
+.divot {
+position: absolute;
+width: 40px;
+height: 40px;
+margin: -20px 0 0 -20px;
+border-radius: 20px;
+background: #000; }
+
+.dice-one {
+margin-left: 150px; }
+
+
+
+.side {
+background-color: green;
+position: absolute;
+opacity: .70;
+width: 200px;
+height: 200px;
+border: 2px solid black; }
+
+.side:nth-child(1) {
+transform: translateZ(100px); }
+
+.side:nth-child(6) {
+transform: rotateY(180deg) translateZ(100px); }
+
+.side:nth-child(3) {
+transform: rotateY(90deg) translateZ(100px); }
+
+.side:nth-child(4) {
+transform: rotateY(-90deg) translateZ(100px); }
+
+.side:nth-child(5) {
+transform: rotateX(90deg) translateZ(100px); }
+
+.side:nth-child(2) {
+transform: rotateX(-90deg) translateZ(100px); }
+
+.show-1 {
+transform: rotateX(720deg) rotateZ(-720deg); }
+
+.show-6 {
+transform: rotateX(-900deg) rotateZ(1080deg); }
+
+.show-3 {
+transform: rotateY(-450deg) rotateZ(-1440deg); }
+
+.show-4 {
+transform: rotateY(810deg) rotateZ(720deg); }
+
+.show-5 {
+transform: rotateX(-810deg) rotateZ(-1080deg); }
+
+.show-2 {
+transform: rotateX(450deg) rotateZ(-720deg); }
+
+/* Dice Dots */
+.two-1, .three-1, .four-1, .five-1, .six-1 {
+top: 20%;
+left: 20%; }
+
+.four-3, .five-3, .six-4 {
+top: 20%;
+left: 80%; }
+
+.one-1, .three-2, .five-5 {
+top: 50%;
+left: 50%; }
+
+.four-2, .five-2, .six-3 {
+top: 80%;
+left: 20%; }
+
+.two-2, .three-3, .four-4, .five-4, .six-6 {
+top: 80%;
+left: 80%; }
+
+.six-2 {
+top: 50%;
+left: 20%; }
+
+.six-5 {
+top: 50%;
+left: 80%; }
+
+#leftPlayer {
+
+  font-size: 25px;
+}
+
+#rightPlayer {
+  font-size: 25px;
+}
+
+
+
+
+
+
+
+#game2 {
+  display: none;
+}
