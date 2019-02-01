@@ -299,7 +299,7 @@ mainPVAI.prototype.assignId2 = function() {
 var easyCount = 0;
 var mediumCount = 0;
 var hardCount = 0;
-
+var responses = 1;
 
 mainPVAI.prototype.playerRoll = function(roll, player, currentPlayer) {
   if (player == 0){
@@ -320,13 +320,15 @@ mainPVAI.prototype.playerRoll = function(roll, player, currentPlayer) {
     if(roll == 1){
       currentPlayer.aiPlayerScore = 0;
       $("#rightScore2").text(currentPlayer.aiPlayerScore)
+      $("#aiResponses").append("<li class='list'>" + "Darn! It's your turn!" + "</li>");
+      responses = responses + 1;
       easyCount = 0;
       mediumCount = 0;
       hardCount = 0;
-      $("#rollButton2").show();
-      $("#leftHold2").show();
+      currentPlayer2 = 0;
+      $("#rollButton2").hide();
+      $("#leftHold2").hide();
       setTimeout("rightHold2()", 4000);
-      $(".side").css("background-color", color);
     }else if(roll != 1){
       var score = currentPlayer.aiPlayerScore;
       currentPlayer.aiPlayerScore = score + roll;
@@ -367,6 +369,10 @@ function leftHold2() {
   $("#leftHold2").hide();
   $("#rollButton2").hide();
   $(".side").css("background-color", colorAI);
+}
+
+function showHold2() {
+  $("#leftHold2").show();
 }
 
 function rightHold2() {
@@ -452,17 +458,28 @@ let timerId = setTimeout(function tick() {
 
 
 
+var ai = document.getElementById("list");
 function easy() {
   var currentPlayerInfo2 = MainPVAI.findPlayer(1);
   if(currentPlayer2 == 1 && currentPlayerInfo2.difficulty == "Easy") {
     if(easyCount == 0) {
       easyCount = easyCount + 1;
       gamePlayAi();
-      $("#aiResponses").append("<li>" + "Roll" + "</li>");
+      $("#aiResponses").append("<li class='list'>" + "Rolling!" + "</li>");
+      responses = responses + 1;
     }else {
       easyCount = 0;
-      $("#aiResponses").append("<li>" + "Hold, your turn!" + "</li>");
+      $("#aiResponses").append("<li class='list'>" + "Holding! Your turn!" + "</li>");
       rightHold2();
+      responses = responses + 1;
+    }
+    if(responses > 12) {
+      $('#aiResponses li').first().remove();
+      responses = responses - 1;
+    }
+    if(responses > 15) {
+      $('#aiResponses li').first().remove();
+      responses = responses - 1;
     }
   }
 }
@@ -502,6 +519,8 @@ function gamePlayAi() {
       a = 0;
     }
     if(currentPlayer2 == 0) {
+      $("#leftHold2").hide();
+      setTimeout("showHold2()", 4000);
       $("#lastRolls2").text("");
       var diceRoll = rollDice1();
       pointRoll2(diceRoll);
