@@ -1,3 +1,7 @@
+var gameOver = "false";
+
+
+
 function sleep(miliseconds) {
    var currentTime = new Date().getTime();
 
@@ -309,6 +313,8 @@ mainPVAI.prototype.playerRoll = function(roll, player, currentPlayer) {
       $("#leftHold2").hide();
       $("#rollButton2").hide();
       setTimeout("leftHold2()", 4000);
+      $("#aiResponses").append("<li class='list'>" + "HA! HA!" + "</li>");
+      responses = responses + 1;
     }else if(roll != 1){
       var score = currentPlayer.firstPlayerScore;
       currentPlayer.firstPlayerScore = score + roll;
@@ -320,7 +326,6 @@ mainPVAI.prototype.playerRoll = function(roll, player, currentPlayer) {
     if(roll == 1){
       currentPlayer.aiPlayerScore = 0;
       $("#rightScore2").text(currentPlayer.aiPlayerScore)
-      $("#aiResponses").append("<li class='list'>" + "Darn! It's your turn!" + "</li>");
       responses = responses + 1;
       easyCount = 0;
       mediumCount = 0;
@@ -329,6 +334,8 @@ mainPVAI.prototype.playerRoll = function(roll, player, currentPlayer) {
       $("#rollButton2").hide();
       $("#leftHold2").hide();
       setTimeout("rightHold2()", 4000);
+      $("#aiResponses").append("<li class='list'>" + "Darn! It's Your Turn!" + "</li>");
+
     }else if(roll != 1){
       var score = currentPlayer.aiPlayerScore;
       currentPlayer.aiPlayerScore = score + roll;
@@ -372,7 +379,10 @@ function leftHold2() {
 }
 
 function showHold2() {
-  $("#leftHold2").show();
+  if(currentPlayer2 == 0 && gameOver == "false") {
+    $("#leftHold2").show();
+    $("#rollButton2").show();
+  }
 }
 
 function rightHold2() {
@@ -388,7 +398,7 @@ function showPreviousRolls2(roll, string2) {
 
   var length = previousRolls.length;
   if(1 == roll) {
-    $("#lastRolls2").append("<li>" + string2 + ' <img src="img/side1.png" height="60px" width="60px">' + "</li>");
+    $("#lastRolls2").append("<li>" + string2 + ' <img src="img/side1.png" height="60px" width="60px"' + "</li>");
     string2 = string2 + ' <img src=img/side1.png height=60px width=60px>';
     numbersString = numbersString + " 1";
   }
@@ -461,11 +471,11 @@ let timerId = setTimeout(function tick() {
 var ai = document.getElementById("list");
 function easy() {
   var currentPlayerInfo2 = MainPVAI.findPlayer(1);
-  if(currentPlayer2 == 1 && currentPlayerInfo2.difficulty == "Easy") {
+  if(currentPlayer2 == 1 && currentPlayerInfo2.difficulty == "Easy" && gameOver == "false") {
     if(easyCount == 0) {
       easyCount = easyCount + 1;
-      gamePlayAi();
       $("#aiResponses").append("<li class='list'>" + "Rolling!" + "</li>");
+      gamePlayAi();
       responses = responses + 1;
     }else {
       easyCount = 0;
@@ -500,8 +510,9 @@ function easy() {
 
 
 function gamePlayAi() {
+
   var stringArray2;
-  var winScore = 100;
+  var winScore = 25;
   var aiPlayerScore = 0;
   var firstPlayerScore = 0;
   var a = 0;
@@ -520,7 +531,8 @@ function gamePlayAi() {
     }
     if(currentPlayer2 == 0) {
       $("#leftHold2").hide();
-      setTimeout("showHold2()", 4000);
+      $("#rollButton2").hide();
+      setTimeout("showHold2()", 4100);
       $("#lastRolls2").text("");
       var diceRoll = rollDice1();
       pointRoll2(diceRoll);
@@ -549,13 +561,24 @@ function gamePlayAi() {
 
     }
   }
-  player1Score = currentPlayerInfo2.player1Score;
-  aiScore = currentPlayerInfo2.player2Score;
+  player1Score = currentPlayerInfo2.firstPlayerScore;
+  aiScore = currentPlayerInfo2.aiPlayerScore;
   if(player1Score >= winScore || aiScore >= winScore) {
     $("#leftHold2").hide();
     $("#rightHold2").hide();
     $("#rollButton2").hide();
+    gameOver = "true";
+    if(aiScore >= winScore) {
+      $("#aiResponses").append("<li class='list'>" + "HA! HA! I won the Game!" + "</li>");
+      $("#whoWon").text("The AI Player has Won the Game. Better luck next Time!");
+    }
+    if(player1Score >= winScore) {
+      $("#aiResponses").append("<li class='list'>" + "Good Game!" + "</li>");
+      $("#whoWon").text("You defeated the AI Player and Won the Game!");
+    }
   }
+
+
 
 
 
