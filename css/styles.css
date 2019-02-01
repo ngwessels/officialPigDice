@@ -103,7 +103,27 @@ ul {
 }
 
 
+#topRow2 {
+}
+#midRow2 {
+  height: 700px;
+}
+#bottomRow2 {
+  height: 100px;
+}
 
+
+#leftHold2 {
+  background-color: black;
+  color:hotpink;
+  display: none;
+}
+
+#rightHold2 {
+  background-color: black;
+  color:hotpink;
+  display: none;
+}
 
 
 
@@ -250,6 +270,32 @@ left: 80%; }
 
 
 
+
+
+/* P-V-AI Styling */
 #game2 {
   display: none;
+}
+
+#dice2 {
+  right: 100px;
+}
+
+
+#diceSpace2 {
+  display: block;
+  margin: 0 auto;
+}
+
+#diceHolder2 {
+  font-size: 30px;
+}
+
+#rollButton2 {
+  position: fixed;
+  top: 70%;
+  right: 47.5%;
+  background-color: black;
+  color:hotpink;
+
 }

@@ -104,7 +104,7 @@ var currentPlayer = 0;
 
 
 var MainPVP = new mainPVP();
-var MainPVAI = new mainPVAI()
+
 
 
 function leftHold() {
@@ -247,52 +247,86 @@ function pointRoll(diceOne) {
 
 // All Code below is experimental!!
 
-
+var color;
+var colorAI = "Blue";
 
 function mainPVAI() {
   this.playerArray = [];
-  this.currentId = 0;
+  this.currentId2 = 0;
 }
 
-mainPVAI.prototype.findPlayers = function(id) {
-  for (var i = 0; i < this.playersArray.length; i++) {
-    if (this.playersArray[i]) {
-      if (this.playersArray[i].id == id) {
-        return this.playersArray[i];
+mainPVAI.prototype.findPlayer = function(id) {
+  for (var i = 0; i < this.playerArray.length; i++) {
+    if (this.playerArray[i]) {
+      if (this.playerArray[i].id == id) {
+        return this.playerArray[i];
       }
     }
   };
   return false;
 }
 
-mainPVAI.prototype.PVAI = function(players) {
-  players.id = this.assignId2();
-  this.playerArray.push(players);
+mainPVAI.prototype.PVAI = function(player) {
+  player.id = this.assignId2();
+  this.playerArray.push(player);
 }
 
 
 function addPlayer(firstPlayer, difficulty, firstPlayerScore, aiPlayerScore) {
-  this.firstPlayer = firstPlayer,
+  this.player = firstPlayer,
   this.difficulty = difficulty,
   this.firstPlayerScore = firstPlayerScore,
   this.aiPlayerScore = aiPlayerScore
-
 }
 
 
 mainPVAI.prototype.updateScore = function(score, player) {
   if (player == 0) {
-    this.playersArray.player1Score = score;
+    this.playerArray.player1Score = score;
   }
   if (player == 1) {
-    this.playersArray.player2Score = score;
+    this.playerArray.player2Score = score;
   }
 }
 
 mainPVAI.prototype.assignId2 = function() {
-  this.currentId += 1;
-  return this.currentId;
+  this.currentId2 += 1;
+  return this.currentId2;
 }
+
+
+mainPVAI.prototype.playerRoll = function(roll, player, currentPlayer) {
+  if (player == 0){
+    if(roll == 1){
+      currentPlayer.firstPlayerScore = 0;
+      $("#leftScore2").text(currentPlayer.firstPlayerScore)
+      leftHold2();
+      $(".side").css("background-color", colorAI);
+    }else if(roll != 1){
+      var score = currentPlayer.firstPlayerScore;
+      currentPlayer.firstPlayerScore = score + roll;
+      score = currentPlayer.firstPlayerScore;
+      $("#leftScore2").text(currentPlayer.firstPlayerScore);
+    }
+  }
+  if (player == 1){
+    if(roll == 1){
+      currentPlayer.aiPlayerScore = 0;
+      $("#rightScore2").text(currentPlayer.aiPlayerScore)
+      rightHold2();
+      $(".side").css("background-color", color);
+    }else if(roll != 1){
+      var score = currentPlayer.aiPlayerScore;
+      currentPlayer.aiPlayerScore = score + roll;
+      score = currentPlayer.aiPlayerScore;
+      $("#rightScore2").text(currentPlayer.aiPlayerScore);
+    }
+  }
+}
+
+
+
+
 
 
 function pvaiMenu() {
@@ -304,27 +338,26 @@ function pvaiMenu() {
 
 function pointRoll2(diceOne) {
   for (var i = 1; i <= 6; i++) {
-    firstDice.classList.remove('show-' + i);
+    secondDice.classList.remove('show-' + i);
     if (diceOne === i) {
-      firstDice.classList.add('show-' + i);
+      secondDice.classList.add('show-' + i);
     }
   }
 }
 
-var color;
-var colorAI = "Blue";
+
 
 
 
 function leftHold2() {
-  currentPlayer = 1;
+  currentPlayer2 = 1;
   $("#leftHold2").hide();
   $("#rightHold2").show();
   $(".side").css("background-color", colorAI);
 }
 
 function rightHold2() {
-  currentPlayer = 0;
+  currentPlayer2 = 0;
   $("#rightHold2").hide();
   $("#leftHold2").show();
   $(".side").css("background-color", color);
@@ -376,34 +409,35 @@ function removeFirst2(array) {
   }
   return array;
 }
+var currentPlayer2 = 0;
 
+var aiScore;
+var MainPVAI = new mainPVAI();
 
-function gamePlayAi(){
-
+function gamePlayAi() {
   var stringArray;
   var winScore = 30;
-  var player1Score = 0;
-  var AiScore = 0;
+
   var a = 0;
-  var currentPlayerInfo = MainPVP.findPlayers(1);
-  player1Score = currentPlayerInfo.firstPlayerScore;
-  player2Score = currentPlayerInfo.aiPlayerScore;
-  if(player1Score >= winScore || player2Score >= winScore) {
+  var currentPlayerInfo2 = MainPVAI.findPlayer(1);
+  player1Score = currentPlayerInfo2.firstPlayerScore;
+  aiScore = currentPlayerInfo2.aiPlayerScore;
+  if(player1Score >= winScore || aiScore >= winScore) {
 
     $("#leftHold2").hide();
     $("#rightHold2").hide();
     $("#rollButton2").hide();
   }
-  if (player1Score < winScore && player2Score < winScore) {
+  if (player1Score < winScore && aiScore < winScore) {
     if(a == 6) {
       a = 0;
     }
-    if(currentPlayer == 0) {
+    if(currentPlayer2 == 0) {
       $("#lastRolls2").text("");
       var diceRoll = rollDice1();
-      pointRoll(diceRoll);
+      pointRoll2(diceRoll);
       $("#diceRoll2").text(diceRoll);
-      MainPVAI.playerRoll(diceRoll, currentPlayer, currentPlayerInfo);
+      MainPVAI.playerRoll(diceRoll, currentPlayer2, currentPlayerInfo2);
       string = showPreviousRolls2(diceRoll, string);
       var stringArray = string.split(" ");
       var length = stringArray.length
@@ -411,12 +445,12 @@ function gamePlayAi(){
         string = removeFirst2(stringArray);
       }
       a++;
-    }else if(currentPlayer == 1) {
+    }else if(currentPlayer2 == 1) {
       $("#lastRolls").text("");
       var diceRoll = rollDice1();
-      pointRoll(diceRoll);
+      pointRoll2(diceRoll);
       $("#diceRoll2").text(diceRoll);
-      MainPVAI.playerRoll(diceRoll, currentPlayer, currentPlayerInfo);
+      MainPVAI.playerRoll(diceRoll, currentPlayer2, currentPlayerInfo2);
       string = showPreviousRolls2(diceRoll, string);
       var stringArray = string.split(" ");
       var length = stringArray.length;
@@ -427,9 +461,9 @@ function gamePlayAi(){
 
     }
   }
-  player1Score = currentPlayerInfo.player1Score;
-  player2Score = currentPlayerInfo.player2Score;
-  if(player1Score >= winScore || player2Score >= winScore) {
+  player1Score = currentPlayerInfo2.player1Score;
+  aiScore = currentPlayerInfo2.player2Score;
+  if(player1Score >= winScore || aiScore >= winScore) {
     $("#leftHold2").hide();
     $("#rightHold2").hide();
     $("#rollButton2").hide();
@@ -481,10 +515,11 @@ $(document).ready(function() {
     MainPVP.PVP(players);
 
   });
-  $("form#playerName").submit(function(evnet) {
+  $("form#playerName").submit(function(event) {
     event.preventDefault();
     var player = $("input#player1").val();
     color = $("#singlePlayerColor").val();
+    console.log(color);
     var difficulty = $("#difficulty").val();
     var aiPlayer = difficulty + "AI";
     var playerScore = 0;
@@ -495,16 +530,16 @@ $(document).ready(function() {
     $(".side").css("background-color", color);
     $("#leftPlayer2").css("color", color);
     $("#rightPlayer2").css("color", colorAI);
-    $("#pvaiMenu").toggle();
+    $("#pvaiMenu").hide();
     $("#game2").toggle();
     $("#leftPlayer2").text(player);
     $("#rightPlayer2").text(aiPlayer);
+    console.log(player, difficulty, playerScore, aiPlayerScore);
     var player = new addPlayer(player, difficulty, playerScore, aiPlayerScore);
+    console.log(player);
     $("#leftHold2").show();
 
     MainPVAI.PVAI(player);
-
-
 
   });
 });
