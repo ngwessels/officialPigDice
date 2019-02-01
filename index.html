@@ -273,6 +273,7 @@ var elDiceOne       = document.getElementById('dice1');
 var elDiceTwo       = document.getElementById('dice2');
 var elComeOut       = document.getElementById('comeOutButton');
 var elPointRoll     = document.getElementById('rollButton');
+var elPointRoll2 = document.getElementById("rollButton2");
 
 
 // elComeOut.onclick   = function () {comeOutRoll();};
@@ -305,6 +306,21 @@ function comeOutRoll() {
 }// END Come out roll function
 
 //POINT ROLL FUNCTION
+function pointRoll2(diceOne) {
+
+// sets dice variables
+// var diceTwo   = Math.floor((Math.random() * 6) + 1);
+
+//Dice reset and display
+
+for (var i = 1; i <= 6; i++) {
+  elDiceOne.classList.remove('show-' + i);
+  if (diceOne === i) {
+    elDiceOne.classList.add('show-' + i);
+  }
+}
+}
+
 function pointRoll(diceOne) {
 
 // sets dice variables
