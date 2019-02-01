@@ -249,7 +249,7 @@ function pointRoll(diceOne) {
 
 var color;
 var colorAI = "Blue";
-
+var currentPlayer2 = 0;
 function mainPVAI() {
   this.playerArray = [];
   this.currentId2 = 0;
@@ -295,13 +295,20 @@ mainPVAI.prototype.assignId2 = function() {
 }
 
 
+
+var easyCount = 0;
+var mediumCount = 0;
+var hardCount = 0;
+
+
 mainPVAI.prototype.playerRoll = function(roll, player, currentPlayer) {
   if (player == 0){
     if(roll == 1){
       currentPlayer.firstPlayerScore = 0;
-      $("#leftScore2").text(currentPlayer.firstPlayerScore)
-      leftHold2();
-      $(".side").css("background-color", colorAI);
+      $("#leftScore2").text(currentPlayer.firstPlayerScore);
+      $("#leftHold2").hide();
+      $("#rollButton2").hide();
+      setTimeout("leftHold2()", 4000);
     }else if(roll != 1){
       var score = currentPlayer.firstPlayerScore;
       currentPlayer.firstPlayerScore = score + roll;
@@ -313,7 +320,12 @@ mainPVAI.prototype.playerRoll = function(roll, player, currentPlayer) {
     if(roll == 1){
       currentPlayer.aiPlayerScore = 0;
       $("#rightScore2").text(currentPlayer.aiPlayerScore)
-      rightHold2();
+      easyCount = 0;
+      mediumCount = 0;
+      hardCount = 0;
+      $("#rollButton2").show();
+      $("#leftHold2").show();
+      setTimeout("rightHold2()", 4000);
       $(".side").css("background-color", color);
     }else if(roll != 1){
       var score = currentPlayer.aiPlayerScore;
@@ -350,48 +362,57 @@ function pointRoll2(diceOne) {
 
 
 function leftHold2() {
+  var currentPlayerInfo2 = MainPVAI.findPlayer(1);
   currentPlayer2 = 1;
   $("#leftHold2").hide();
-  $("#rightHold2").show();
+  $("#rollButton2").hide();
   $(".side").css("background-color", colorAI);
 }
 
 function rightHold2() {
   currentPlayer2 = 0;
-  $("#rightHold2").hide();
+  $("#rollButton2").show();
   $("#leftHold2").show();
   $(".side").css("background-color", color);
 }
-
+var string2 = [];
 var previousRolls2 = [];
-function showPreviousRolls2(roll, string) {
+var numbersString;
+function showPreviousRolls2(roll, string2) {
+
   var length = previousRolls.length;
   if(1 == roll) {
-    $("#lastRolls").append("<li>" + string + '<img src="img/side1.png" height="60px" width="60px">' + "</li>");
-    string = string + ' <img src=img/side1.png height=60px width=60px>';
+    $("#lastRolls2").append("<li>" + string2 + '<img src="img/side1.png" height="60px" width="60px">' + "</li>");
+    string2 = string2 + ' <img src=img/side1.png height=60px width=60px>';
+    numbersString = numbersString + " 1";
   }
   if(2 == roll) {
-    $("#lastRolls").append("<li>" + string + '<img src="img/side2.png" height="60px" width="60px">' + "</li>");
-    string = string + ' <img src=img/side2.png height=60px width=60px>';
+    $("#lastRolls2").append("<li>" + string2 + '<img src="img/side2.png" height="60px" width="60px">' + "</li>");
+    string2 = string2 + ' <img src=img/side2.png height=60px width=60px>';
+    numbersString = numbersString + " 2";
   }
   if(3 == roll) {
-    $("#lastRolls").append("<li>" + string + '<img src="img/side3.png" height="60px" width="60px">' + "</li>");
-    string = string + ' <img src=img/side3.png height=60px width=60px>';
+    $("#lastRolls2").append("<li>" + string2 + '<img src="img/side3.png" height="60px" width="60px">' + "</li>");
+    string2 = string2 + ' <img src=img/side3.png height=60px width=60px>';
+    numbersString = numbersString + " 3";
 
   }
   if(4 == roll) {
-    $("#lastRolls").append("<li>" + string + '<img src="img/side4.png" height="60px" width="60px">' + "</li>");
-    string = string + ' <img src=img/side4.png height=60px width=60px>';
+    $("#lastRolls2").append("<li>" + string2 + '<img src="img/side4.png" height="60px" width="60px">' + "</li>");
+    string2 = string2 + ' <img src=img/side4.png height=60px width=60px>';
+    numbersString = numbersString + " 4";
   }
   if(5 == roll) {
-    $("#lastRolls").append("<li>" + string + '<img src="img/side5.png" height="60px" width="60px">' + "</li>");
-    string = string + ' <img src=img/side5.png height=60px width=60px>';
+    $("#lastRolls2").append("<li>" + string2 + '<img src="img/side5.png" height="60px" width="60px">' + "</li>");
+    string2 = string2 + ' <img src=img/side5.png height=60px width=60px>';
+    numbersString = numbersString + " 5";
   }
   if(6 == roll) {
-    $("#lastRolls").append("<li>" + string + '<img src="img/side6.png" height="60px" width="60px">' + "</li>");
-    string = string + ' <img src=img/side6.png height=60px width=60px>';
+    $("#lastRolls2").append("<li>" + string2 + '<img src="img/side6.png" height="60px" width="60px">' + "</li>");
+    string2 = string2 + ' <img src=img/side6.png height=60px width=60px>';
+    numbersString = numbersString + " 6";
   }
-  return string;
+  return string2;
 }
 
 function removeFirst2(array) {
@@ -409,15 +430,63 @@ function removeFirst2(array) {
   }
   return array;
 }
-var currentPlayer2 = 0;
 
-var aiScore;
+
 var MainPVAI = new mainPVAI();
 
-function gamePlayAi() {
-  var stringArray;
-  var winScore = 30;
 
+
+function sleep(miliseconds) {
+   var currentTime = new Date().getTime();
+
+   while (currentTime + miliseconds >= new Date().getTime()) {
+   }
+}
+
+let timerId = setTimeout(function tick() {
+  console.log('tick');
+  timerId = setTimeout(tick, 5000); // (*)
+  easy();
+}, 2000);
+
+
+
+
+function easy() {
+  var currentPlayerInfo2 = MainPVAI.findPlayer(1);
+  if(currentPlayer2 == 1 && currentPlayerInfo2.difficulty == "Easy") {
+    if(easyCount == 0) {
+      easyCount = easyCount + 1;
+      gamePlayAi();
+      $("#aiResponses").append("<li>" + "Roll" + "</li>");
+    }else {
+      easyCount = 0;
+      $("#aiResponses").append("<li>" + "Hold, your turn!" + "</li>");
+      rightHold2();
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function gamePlayAi() {
+  var stringArray2;
+  var winScore = 200;
+  var aiPlayerScore = 0;
+  var firstPlayerScore = 0;
   var a = 0;
   var currentPlayerInfo2 = MainPVAI.findPlayer(1);
   player1Score = currentPlayerInfo2.firstPlayerScore;
@@ -438,24 +507,24 @@ function gamePlayAi() {
       pointRoll2(diceRoll);
       $("#diceRoll2").text(diceRoll);
       MainPVAI.playerRoll(diceRoll, currentPlayer2, currentPlayerInfo2);
-      string = showPreviousRolls2(diceRoll, string);
-      var stringArray = string.split(" ");
-      var length = stringArray.length
-      if (stringArray.length > 23) {
-        string = removeFirst2(stringArray);
+      string2 = showPreviousRolls2(diceRoll, string2);
+      var stringArray2 = string2.split(" ");
+      var length = stringArray2.length
+      if (stringArray2.length > 23) {
+        string2 = removeFirst2(stringArray2);
       }
       a++;
-    }else if(currentPlayer2 == 1) {
-      $("#lastRolls").text("");
+    } else if(currentPlayer2 == 1) {
+      $("#lastRolls2").text("");
       var diceRoll = rollDice1();
       pointRoll2(diceRoll);
       $("#diceRoll2").text(diceRoll);
       MainPVAI.playerRoll(diceRoll, currentPlayer2, currentPlayerInfo2);
-      string = showPreviousRolls2(diceRoll, string);
-      var stringArray = string.split(" ");
-      var length = stringArray.length;
-      if (stringArray.length > 23) {
-        string = removeFirst2(stringArray);
+      string2 = showPreviousRolls2(diceRoll, string2);
+      var stringArray2 = string2.split(" ");
+      var length = stringArray2.length;
+      if (stringArray2.length > 23) {
+        string2 = removeFirst2(stringArray2);
       }
       a++;
 
@@ -468,6 +537,8 @@ function gamePlayAi() {
     $("#rightHold2").hide();
     $("#rollButton2").hide();
   }
+
+
 
 }
 
