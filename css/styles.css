@@ -4,41 +4,14 @@
   background-size: cover;
   color:hotpink;
 }
-#pvaiMenu {
-  display: none;
-}
-#bottomRow{
-  height: 100px;
-}
-#diceHolder {
-  font-size: 30px;
-}
-
 #startGameButton {
   background-color: black;
   color:hotpink;
   display: block;
 }
-
-#leftHold {
-  background-color: black;
-  color:hotpink;
-  display: none;
-}
-
-#rightHold{
-  background-color: black;
-  color:hotpink;
-  display: none;
-}
-#PVP {
-  background-color: black;
-  color:hotpink;
-}
-
-#PVAI{
-  background-color: black;
-  color:hotpink;
+#gameTitle {
+  text-align: center;
+  margin-top: 5%
 }
 
 #menu {
@@ -47,13 +20,8 @@
 #pvpMenu {
   display: none;
 }
-
-#gameTitle {
-  text-align: center;
-  margin-top: 5%
-}
-.mode {
-  height: 90px;
+#pvaiMenu {
+  display: none;
 }
 
 #gameInfo {
@@ -68,15 +36,44 @@
 .modeLabel {
   text-align: center;
 }
-.col-md-2 {
-  border: auto;
-  border-style: solid;
-  text-align: center;
+
+#PVP {
+  background-color: black;
+  color:hotpink;
 }
 
-.holdButton {
-  height: 100%;
+#PVAI{
+  background-color: black;
+  color:hotpink;
 }
+
+.mode {
+  height: 90px;
+}
+
+
+#topRow {
+}
+#midRow {
+  height: 700px;
+}
+#bottomRow{
+  height: 100px;
+}
+
+
+#leftHold {
+  background-color: black;
+  color:hotpink;
+  display: none;
+}
+
+#rightHold{
+  background-color: black;
+  color:hotpink;
+  display: none;
+}
+
 
 .col-md-8 {
   border: auto;
@@ -85,22 +82,39 @@
 
 }
 
-#topRow {
-
-
+.col-md-2 {
+  border: auto;
+  border-style: solid;
+  text-align: center;
 }
 
-#midRow {
-  height: 700px;
+
+.holdButton {
+  height: 100%;
 }
 
-#bottomRow {
 
-
+#diceHolder {
+  font-size: 30px;
 }
+
 ul {
   list-style-type: none;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/* PVP Dice Styling */
+
 
 
 #diceSpace {
