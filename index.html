@@ -27,7 +27,7 @@
               </div>
               <div class="modeLabel col-md-6">
                 <label for="P-V-AI">Player Versus AI</label>
-                <button type="button" class="btn btn-primary btn-lg btn-block mode" id="PVAI" onclick="pvpAI()">P-V-AI</button>
+                <button type="button" class="btn btn-primary btn-lg btn-block mode" id="PVAI" onclick="pvaiMenu()">P-V-AI</button>
               </div>
               <div id="gameTitle"><h2>Game Info</h2>
                 <p id="gameInfo">Each turn, a player repeatedly rolls a die until either a 1 is rolled or the player decides to "hold":
@@ -240,7 +240,7 @@
                       </div>
                     </div> <!-- END container-dice -->
                   </div>
-                  <button type="submit" class="btn btn-primary btn-lg" onclick="gamePlay()" id="rollButton2">Roll!</button>
+                  <button type="submit" class="btn btn-primary btn-lg" onclick="gamePlayAi()" id="rollButton2">Roll!</button>
                 </div>
               <div class = "col-md-2">
                   <button id="rightHold2" type="button" class="btn btn-primary btn-lg btn-block holdButton" onclick="rightHold2()">Hold</button>
@@ -338,6 +338,23 @@ function mainPVAI() {
 }
 
 
+
+mainPVAI.prototype.findPlayers = function(id) {
+  for (var i = 0; i < this.playersArray.length; i++) {
+    if (this.playersArray[i]) {
+      if (this.playersArray[i].id == id) {
+        return this.playersArray[i];
+      }
+    }
+  };
+  return false;
+}
+
+
+
+
+
+
 mainPVP.prototype.findPlayers = function(id) {
   for (var i = 0; i < this.playersArray.length; i++) {
     if (this.playersArray[i]) {
@@ -347,6 +364,19 @@ mainPVP.prototype.findPlayers = function(id) {
     }
   };
   return false;
+}
+
+
+
+
+
+mainPVAI.prototype.updateScore = function(score, player) {
+  if (player == 0) {
+    this.playersArray.player1Score = score;
+  }
+  if (player == 1) {
+    this.playersArray.player2Score = score;
+  }
 }
 
 mainPVP.prototype.updateScore = function(score, player) {
@@ -359,6 +389,15 @@ mainPVP.prototype.updateScore = function(score, player) {
 }
 
 
+mainPVAI.prototype.PVAI = function(players) {
+  players.id = this.assignId2();
+  this.playerArray.push(players);
+
+
+}
+
+
+
 mainPVP.prototype.PVP = function(players) {
   players.id = this.assignId();
   this.playersArray.push(players);
@@ -366,16 +405,27 @@ mainPVP.prototype.PVP = function(players) {
 
 }
 
+
+mainPVAI.prototype.assignId2 = function() {
+  this.currentId += 1;
+  return this.currentId;
+}
+
+
 mainPVP.prototype.assignId = function() {
   this.currentId += 1;
   return this.currentId;
 }
 
 
-function hideStartGame() {
-  $("#startGame").toggle();
+
+
+function pvaiMenu() {
   $("#menu").toggle();
+  $("#pvaiMenu").toggle();
+
 }
+
 
 function pvpMenu() {
   $("#menu").toggle();
@@ -385,11 +435,14 @@ function pvpMenu() {
 }
 
 
-function pvpAI() {
+function hideStartGame() {
+  $("#startGame").toggle();
   $("#menu").toggle();
-  $("#pvaiMenu").toggle();
-
 }
+
+
+
+
 
 function addPlayers(firstPlayer, secondPlayer, player1Score, player2Score) {
   this.firstPlayer = firstPlayer,
@@ -399,9 +452,11 @@ function addPlayers(firstPlayer, secondPlayer, player1Score, player2Score) {
 
 }
 
-function addPlayer(firstPlayer, difficulty) {
+function addPlayer(firstPlayer, difficulty, firstPlayerScore, aiPlayerScore) {
   this.firstPlayer = firstPlayer,
-  this.difficulty = difficulty
+  this.difficulty = difficulty,
+  this.firstPlayerScore = firstPlayerScore,
+  this.aiPlayerScore = aiPlayerScore
 
 }
 
@@ -576,6 +631,8 @@ function gamePlay(){
   }
 
 }
+var color;
+var colorAI = "Blue";
 
 
 
@@ -614,10 +671,68 @@ function gamePlay(){
 
 
 
+function leftHold2() {
+  currentPlayer = 1;
+  $("#leftHold2").hide();
+  $("#rightHold2").show();
+  $(".side").css("background-color", colorAI);
+}
+
+function rightHold2() {
+  currentPlayer = 0;
+  $("#rightHold2").hide();
+  $("#leftHold2").show();
+  $(".side").css("background-color", color);
+}
+
+var previousRolls2 = [];
+function showPreviousRolls2(roll, string) {
+  var length = previousRolls.length;
+  if(1 == roll) {
+    $("#lastRolls").append("<li>" + string + '<img src="img/side1.png" height="60px" width="60px">' + "</li>");
+    string = string + ' <img src=img/side1.png height=60px width=60px>';
+  }
+  if(2 == roll) {
+    $("#lastRolls").append("<li>" + string + '<img src="img/side2.png" height="60px" width="60px">' + "</li>");
+    string = string + ' <img src=img/side2.png height=60px width=60px>';
+  }
+  if(3 == roll) {
+    $("#lastRolls").append("<li>" + string + '<img src="img/side3.png" height="60px" width="60px">' + "</li>");
+    string = string + ' <img src=img/side3.png height=60px width=60px>';
+
+  }
+  if(4 == roll) {
+    $("#lastRolls").append("<li>" + string + '<img src="img/side4.png" height="60px" width="60px">' + "</li>");
+    string = string + ' <img src=img/side4.png height=60px width=60px>';
+  }
+  if(5 == roll) {
+    $("#lastRolls").append("<li>" + string + '<img src="img/side5.png" height="60px" width="60px">' + "</li>");
+    string = string + ' <img src=img/side5.png height=60px width=60px>';
+  }
+  if(6 == roll) {
+    $("#lastRolls").append("<li>" + string + '<img src="img/side6.png" height="60px" width="60px">' + "</li>");
+    string = string + ' <img src=img/side6.png height=60px width=60px>';
+  }
+  return string;
+}
 
 
 
+function removeFirst2(array) {
 
+  if(array[0] == "" || array[0] == "undefined") {
+    array.splice(0 ,1);
+  }
+  var newArray;
+  for(var i = 0; i < 4; i++) {
+    newArray = array.shift();
+  }
+  array = array.toString();
+  for(var a = 0; a < array.length; a++) {
+    array = array.replace(",", " ");
+  }
+  return array;
+}
 
 
 
@@ -644,47 +759,42 @@ function gamePlayAi(){
   var AiScore = 0;
   var a = 0;
   var currentPlayerInfo = MainPVP.findPlayers(1);
-  player1Score = currentPlayerInfo.player1Score;
-  player2Score = currentPlayerInfo.AiScore;
+  player1Score = currentPlayerInfo.firstPlayerScore;
+  player2Score = currentPlayerInfo.aiPlayerScore;
   if(player1Score >= winScore || player2Score >= winScore) {
 
-    $("#leftHold").hide();
-    $("#rightHold").hide();
-    $("#rollButton").hide();
+    $("#leftHold2").hide();
+    $("#rightHold2").hide();
+    $("#rollButton2").hide();
   }
   if (player1Score < winScore && player2Score < winScore) {
     if(a == 6) {
       a = 0;
     }
     if(currentPlayer == 0) {
-      $("#lastRolls").text("");
+      $("#lastRolls2").text("");
       var diceRoll = rollDice1();
       pointRoll(diceRoll);
-      $("#diceRoll").text(diceRoll);
-      MainPVP.playerRoll(diceRoll, currentPlayer, currentPlayerInfo);
-      string = showPreviousRolls(diceRoll, string);
+      $("#diceRoll2").text(diceRoll);
+      MainPVAI.playerRoll(diceRoll, currentPlayer, currentPlayerInfo);
+      string = showPreviousRolls2(diceRoll, string);
       var stringArray = string.split(" ");
       var length = stringArray.length
       if (stringArray.length > 23) {
-        string = removeFirst(stringArray);
+        string = removeFirst2(stringArray);
       }
-
-
-
       a++;
-
-
     }else if(currentPlayer == 1) {
       $("#lastRolls").text("");
       var diceRoll = rollDice1();
       pointRoll(diceRoll);
-      $("#diceRoll").text(diceRoll);
-      MainPVP.playerRoll(diceRoll, currentPlayer, currentPlayerInfo);
-      string = showPreviousRolls(diceRoll, string);
+      $("#diceRoll2").text(diceRoll);
+      MainPVAI.playerRoll(diceRoll, currentPlayer, currentPlayerInfo);
+      string = showPreviousRolls2(diceRoll, string);
       var stringArray = string.split(" ");
       var length = stringArray.length;
       if (stringArray.length > 23) {
-        string = removeFirst(stringArray);
+        string = removeFirst2(stringArray);
       }
       a++;
 
@@ -693,9 +803,9 @@ function gamePlayAi(){
   player1Score = currentPlayerInfo.player1Score;
   player2Score = currentPlayerInfo.player2Score;
   if(player1Score >= winScore || player2Score >= winScore) {
-    $("#leftHold").hide();
-    $("#rightHold").hide();
-    $("#rollButton").hide();
+    $("#leftHold2").hide();
+    $("#rightHold2").hide();
+    $("#rollButton2").hide();
   }
 
 }
@@ -728,11 +838,27 @@ $(document).ready(function() {
   $("form#playerName").submit(function(evnet) {
     event.preventDefault();
     var player = $("input#player1").val();
+    color = $("#singlePlayerColor").val();
     var difficulty = $("#difficulty").val();
+    var aiPlayer = difficulty + "AI";
+    var playerScore = 0;
+    var aiPlayerScore = 0;
     $("#pvaiMenu").toggle();
-    $("#game").toggle();
     $("#rightPlayer").text(player);
     $("#leftPlayer").text(difficulty + " AI");
+    $(".side").css("background-color", color);
+    $("#leftPlayer2").css("color", color);
+    $("#rightPlayer2").css("color", colorAI);
+    $("#pvaiMenu").toggle();
+    $("#game2").toggle();
+    $("#leftPlayer2").text(player);
+    $("#rightPlayer2").text(aiPlayer);
+    var player = new addPlayer(player, difficulty, playerScore, aiPlayerScore);
+    $("#leftHold2").show();
+
+    MainPVAI.PVAI(player);
+
+
 
   });
 });
