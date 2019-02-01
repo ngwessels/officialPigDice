@@ -388,33 +388,33 @@ function showPreviousRolls2(roll, string2) {
 
   var length = previousRolls.length;
   if(1 == roll) {
-    $("#lastRolls2").append("<li>" + string2 + '<img src="img/side1.png" height="60px" width="60px">' + "</li>");
+    $("#lastRolls2").append("<li>" + string2 + ' <img src="img/side1.png" height="60px" width="60px">' + "</li>");
     string2 = string2 + ' <img src=img/side1.png height=60px width=60px>';
     numbersString = numbersString + " 1";
   }
   if(2 == roll) {
-    $("#lastRolls2").append("<li>" + string2 + '<img src="img/side2.png" height="60px" width="60px">' + "</li>");
+    $("#lastRolls2").append("<li>" + string2 + ' <img src="img/side2.png" height="60px" width="60px">' + "</li>");
     string2 = string2 + ' <img src=img/side2.png height=60px width=60px>';
     numbersString = numbersString + " 2";
   }
   if(3 == roll) {
-    $("#lastRolls2").append("<li>" + string2 + '<img src="img/side3.png" height="60px" width="60px">' + "</li>");
+    $("#lastRolls2").append("<li>" + string2 + ' <img src="img/side3.png" height="60px" width="60px">' + "</li>");
     string2 = string2 + ' <img src=img/side3.png height=60px width=60px>';
     numbersString = numbersString + " 3";
 
   }
   if(4 == roll) {
-    $("#lastRolls2").append("<li>" + string2 + '<img src="img/side4.png" height="60px" width="60px">' + "</li>");
+    $("#lastRolls2").append("<li>" + string2 + ' <img src="img/side4.png" height="60px" width="60px">' + "</li>");
     string2 = string2 + ' <img src=img/side4.png height=60px width=60px>';
     numbersString = numbersString + " 4";
   }
   if(5 == roll) {
-    $("#lastRolls2").append("<li>" + string2 + '<img src="img/side5.png" height="60px" width="60px">' + "</li>");
+    $("#lastRolls2").append("<li>" + string2 + ' <img src="img/side5.png" height="60px" width="60px">' + "</li>");
     string2 = string2 + ' <img src=img/side5.png height=60px width=60px>';
     numbersString = numbersString + " 5";
   }
   if(6 == roll) {
-    $("#lastRolls2").append("<li>" + string2 + '<img src="img/side6.png" height="60px" width="60px">' + "</li>");
+    $("#lastRolls2").append("<li>" + string2 + ' <img src="img/side6.png" height="60px" width="60px">' + "</li>");
     string2 = string2 + ' <img src=img/side6.png height=60px width=60px>';
     numbersString = numbersString + " 6";
   }
@@ -501,7 +501,7 @@ function easy() {
 
 function gamePlayAi() {
   var stringArray2;
-  var winScore = 200;
+  var winScore = 100;
   var aiPlayerScore = 0;
   var firstPlayerScore = 0;
   var a = 0;

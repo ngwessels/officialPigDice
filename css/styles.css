@@ -311,3 +311,13 @@ left: 80%; }
   color:hotpink;
 
 }
+
+
+#lastRolls2 {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  left: 70%;
+  padding: 0%;
+  padding-top: 3.5%;
+}
