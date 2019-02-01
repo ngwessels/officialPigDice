@@ -1,4 +1,35 @@
 var gameOver = "false";
+var string2 = [];
+var previousRolls2 = [];
+var numbersArray = [];
+var firstDice = document.getElementById('dice1');
+var secondDice = document.getElementById('dice2');
+var color1;
+var color2;
+var currentPlayer = 0;
+var previousRolls = [];
+var string = [];
+var color;
+var colorAI = "Blue";
+var currentPlayer2 = 0;
+var easyCount = 0;
+var mediumCount = 0;
+var hardCount = 0;
+var responses = 1;
+var ai = document.getElementById("list");
+var winScore;
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -10,8 +41,7 @@ function sleep(miliseconds) {
 }
 
 
-var firstDice = document.getElementById('dice1');
-var secondDice = document.getElementById('dice2');
+
 
 
 
@@ -73,8 +103,7 @@ function rollDice1() {
 
 }
 
-var color1;
-var color2;
+
 
 mainPVP.prototype.playerRoll = function(roll, player, currentPlayer) {
   if (player == 0){
@@ -104,7 +133,7 @@ mainPVP.prototype.playerRoll = function(roll, player, currentPlayer) {
     }
   }
 }
-var currentPlayer = 0;
+
 
 
 var MainPVP = new mainPVP();
@@ -125,7 +154,7 @@ function rightHold() {
   $(".side").css("background-color", color1);
 }
 
-var previousRolls = [];
+
 function showPreviousRolls(roll, string) {
   var length = previousRolls.length;
   if(1 == roll) {
@@ -174,7 +203,7 @@ function removeFirst(array) {
   return array;
 }
 
-var string = [];
+
 function gamePlay(){
 
   var stringArray;
@@ -251,9 +280,7 @@ function pointRoll(diceOne) {
 
 // All Code below is experimental!!
 
-var color;
-var colorAI = "Blue";
-var currentPlayer2 = 0;
+
 function mainPVAI() {
   this.playerArray = [];
   this.currentId2 = 0;
@@ -300,10 +327,7 @@ mainPVAI.prototype.assignId2 = function() {
 
 
 
-var easyCount = 0;
-var mediumCount = 0;
-var hardCount = 0;
-var responses = 1;
+
 
 mainPVAI.prototype.playerRoll = function(roll, player, currentPlayer) {
   if (player == 0){
@@ -391,42 +415,40 @@ function rightHold2() {
   $("#leftHold2").show();
   $(".side").css("background-color", color);
 }
-var string2 = [];
-var previousRolls2 = [];
-var numbersString;
+
 function showPreviousRolls2(roll, string2) {
 
   var length = previousRolls.length;
   if(1 == roll) {
     $("#lastRolls2").append("<li>" + string2 + ' <img src="img/side1.png" height="60px" width="60px"' + "</li>");
     string2 = string2 + ' <img src=img/side1.png height=60px width=60px>';
-    numbersString = numbersString + " 1";
+    numbersArray.push("1");
   }
   if(2 == roll) {
     $("#lastRolls2").append("<li>" + string2 + ' <img src="img/side2.png" height="60px" width="60px">' + "</li>");
     string2 = string2 + ' <img src=img/side2.png height=60px width=60px>';
-    numbersString = numbersString + " 2";
+    numbersArray.push("2");
   }
   if(3 == roll) {
     $("#lastRolls2").append("<li>" + string2 + ' <img src="img/side3.png" height="60px" width="60px">' + "</li>");
     string2 = string2 + ' <img src=img/side3.png height=60px width=60px>';
-    numbersString = numbersString + " 3";
+    numbersArray.push("3");
 
   }
   if(4 == roll) {
     $("#lastRolls2").append("<li>" + string2 + ' <img src="img/side4.png" height="60px" width="60px">' + "</li>");
     string2 = string2 + ' <img src=img/side4.png height=60px width=60px>';
-    numbersString = numbersString + " 4";
+    numbersArray.push("4");
   }
   if(5 == roll) {
     $("#lastRolls2").append("<li>" + string2 + ' <img src="img/side5.png" height="60px" width="60px">' + "</li>");
     string2 = string2 + ' <img src=img/side5.png height=60px width=60px>';
-    numbersString = numbersString + " 5";
+    numbersArray.push("5");
   }
   if(6 == roll) {
     $("#lastRolls2").append("<li>" + string2 + ' <img src="img/side6.png" height="60px" width="60px">' + "</li>");
     string2 = string2 + ' <img src=img/side6.png height=60px width=60px>';
-    numbersString = numbersString + " 6";
+    numbersArray.push("6");
   }
   return string2;
 }
@@ -459,6 +481,29 @@ function sleep(miliseconds) {
    }
 }
 
+
+
+
+function numberOfOnes() {
+  var length = numbersArray.length;
+  var iNum = 0;
+  var otherNum = 0;
+  var iPercentage = 0;
+  for(var i = 0; i < length; i++) {
+    var integer = numbersArray[i];
+    if(integer == "1") {
+      iNum = iNum + 1;
+    }
+    else {
+      otherNum = otherNum + 1;
+    }
+  }
+  iPercentage = (iNum / otherNum);
+  return iPercentage;
+
+}
+
+
 let timerId = setTimeout(function tick() {
   console.log('tick');
   timerId = setTimeout(tick, 5000); // (*)
@@ -467,8 +512,95 @@ let timerId = setTimeout(function tick() {
 
 
 
+function difference(player1Score, aiScore) {
+  if(player1Score > aiScore) {
+    return aiScore - player1Score;
+  }
+  if(player1Score < aiScore) {
+    return aiScore - playerScore;
+  }
 
-var ai = document.getElementById("list");
+}
+
+function aiAlmost(aiScore) {
+  return winScore - aiScore;
+
+}
+
+function playerAlmost(player1Score) {
+  return winScore - player1Score;
+}
+
+
+function randomTo() {
+  var randomized = Math.floor((Math.random() * 100 + 1));
+  return randomized;
+}
+
+// gamePlayAi();
+// rightHold2();
+
+function medium() {
+  var currentPlayerInfo2 = MainPVAI.findPlayer(1);
+  var player1Score = currentPlayerInfo2.firstPlayerScore;
+  var aiScore = currentPlayerInfo2.aiPlayerScore;
+  var percentage = numberOfOnes();
+  var playerToWin = playerAlmost(player1Score);
+  var aiToWin = aiAlmost(aiScore);
+  var space = difference(player1Score, aiScore);
+  var random = randomTo();
+  if(currentPlayer2 == 1 && currentPlayerInfo2.difficulty == "Medium" && gameOver == "false"){
+    if (aiScore < player1Score) {
+      if(playerToWin < 20) {
+        if(percentage > 1.667) {
+          if(randomTo < 70) {
+
+          }
+
+        }else if(percentage <= 1.667)  {
+
+
+        }
+
+
+
+
+
+
+
+      }else if(playerToWin > 20) {
+
+
+      }
+
+
+
+
+
+
+
+    } else if (aiScore > player1Score){
+
+
+
+    }
+  }
+
+  if(responses > 12) {
+    $('#aiResponses li').first().remove();
+    responses = responses - 1;
+  }
+  if(responses > 15) {
+    $('#aiResponses li').first().remove();
+    responses = responses - 1;
+  }
+}
+
+
+
+
+
+
 function easy() {
   var currentPlayerInfo2 = MainPVAI.findPlayer(1);
   if(currentPlayer2 == 1 && currentPlayerInfo2.difficulty == "Easy" && gameOver == "false") {
@@ -512,7 +644,7 @@ function easy() {
 function gamePlayAi() {
 
   var stringArray2;
-  var winScore = 25;
+  winScore = 25;
   var aiPlayerScore = 0;
   var firstPlayerScore = 0;
   var a = 0;
@@ -577,32 +709,7 @@ function gamePlayAi() {
       $("#whoWon").text("You defeated the AI Player and Won the Game!");
     }
   }
-
-
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
