@@ -508,6 +508,7 @@ let timerId = setTimeout(function tick() {
   console.log('tick');
   timerId = setTimeout(tick, 5000); // (*)
   easy();
+  medium();
 }, 2000);
 
 
@@ -517,7 +518,7 @@ function difference(player1Score, aiScore) {
     return aiScore - player1Score;
   }
   if(player1Score < aiScore) {
-    return aiScore - playerScore;
+    return aiScore - player1Score;
   }
 
 }
@@ -536,9 +537,19 @@ function randomTo() {
   var randomized = Math.floor((Math.random() * 100 + 1));
   return randomized;
 }
+function randomStart() {
+  var randomized = Math.floor((Math.random() * 4 + 1));
+  return randomized;
+}
+function randomGo() {
+  var randomized = Math.floor((Math.random() * 11 + 6));
+  return randomized;
+}
 
 // gamePlayAi();
 // rightHold2();
+
+// 1/6 = 16.666667%
 
 function medium() {
   var currentPlayerInfo2 = MainPVAI.findPlayer(1);
@@ -549,42 +560,216 @@ function medium() {
   var aiToWin = aiAlmost(aiScore);
   var space = difference(player1Score, aiScore);
   var random = randomTo();
-  if(currentPlayer2 == 1 && currentPlayerInfo2.difficulty == "Medium" && gameOver == "false"){
-    if (aiScore < player1Score) {
-      if(playerToWin < 20) {
-        if(percentage > 1.667) {
-          if(randomTo < 70) {
+  var randomSt = randomStart();
+  var scoreToGo = randomGo();
+  console.log("Percentage: " + percentage);
+  console.log("Player to win: " + playerToWin);
+  console.log("AI to Win: " + aiToWin);
+  console.log("Difference: " + space);
+  console.log("Random Int: " + random);
+  console.log("Random Start: " + randomSt);
 
+
+  if(currentPlayer2 == 1 && currentPlayerInfo2.difficulty == "Medium" && gameOver == "false"){
+    if(numbersArray.length > randomSt || playerToWin < 20) {
+
+
+      if(aiScore < scoreToGo) {
+        if(percentage < 4) {
+          if(random > 8) {
+            gamePlayAi();
+          } else {
+            rightHold2();
+          }
+        } else {
+          if(random > 20) {
+            gamePlayAi();
+          } else {
+            rightHold2();
+          }
+        }
+      } else if (aiScore <= player1Score) {
+        debugger;
+        if(playerToWin < 20) {
+          if(percentage > 17.5) {
+            if(random < 98) {
+              gamePlayAi();
+            } else {
+              rightHold2();
+            }
+          }else if(percentage <= 17.5 && percentage > 17)  {
+            if(random < 90) {
+              gamePlayAi();
+            } else {
+              rightHold2();
+            }
+          } else if(percentage <= 17 && percentage > 16.0) {
+            if(random < 80) {
+              gamePlayAi();
+            } else {
+              rightHold2();
+            }
+          } else if(percentage <= 16.0) {
+            if(random < 70) {
+              gamePlayAi();
+            } else {
+              rightHold2();
+            }
+          }
+        }else if(playerToWin >= 20 && playerToWin < 30) {
+          if(percentage > 17) {
+            if(random < 95) {
+              gamePlayAi();
+            } else {
+              rightHold2();
+            }
+          }else if(percentage <= 17 && percentage > 16)  {
+            if(random < 85) {
+              gamePlayAi();
+            } else {
+              rightHold2();
+            }
+          } else if(percentage <= 16 && percentage > 14) {
+            if(random < 75) {
+              gamePlayAi();
+            } else {
+              rightHold2();
+            }
+          } else if(percentage <= 14) {
+            if(random < 65) {
+              gamePlayAi();
+            } else {
+              rightHold2();
+            }
           }
 
-        }else if(percentage <= 1.667)  {
+        } else {
+          if(percentage > 17) {
+            if(random < 80) {
+              gamePlayAi();
+            } else {
+              rightHold2();
+            }
+          }else if(percentage <= 17 && percentage > 15)  {
+            if(random < 70) {
+              gamePlayAi();
+            } else {
+              rightHold2();
+            }
+          } else if(percentage <= 15 && percentage > 13) {
+            if(random < 65) {
+              gamePlayAi();
+            } else {
+              rightHold2();
+            }
+          } else if(percentage <= 13) {
+            if(random < 65) {
+              gamePlayAi();
+            } else {
+              rightHold2();
+            }
+          }
+
 
 
         }
 
 
+      } else if (aiScore > player1Score){
+        debugger;
+        if(aiToWin < 20) {
+          if(percentage > 15) {
+            if(random < 65) {
+              gamePlayAi();
+            } else {
+              rightHold2();
+            }
+          }else if(percentage <= 15 && percentage > 13)  {
+            if(random < 70) {
+              gamePlayAi();
+            } else {
+              rightHold2();
+            }
+          } else if(percentage <= 12 && percentage > 9) {
+            if(random < 60) {
+              gamePlayAi();
+            } else {
+              rightHold2();
+            }
+          } else if(percentage < 9) {
+            if(random < 55) {
+              gamePlayAi();
+            } else {
+              rightHold2();
+            }
+          }
+        }else if(aiToWin >= 20 && aiToWin < 30) {
+          if(percentage > 13) {
+            if(random > 25) {
+              gamePlayAi();
+            } else {
+              rightHold2();
+            }
+          }else if(percentage <= 13 && percentage > 12)  {
+            if(random > 35) {
+              gamePlayAi();
+            } else {
+              rightHold2();
+            }
+          } else if(percentage <= 12 && percentage > 11) {
+            if(random > 64) {
+              gamePlayAi();
+            } else {
+              rightHold2();
+            }
+          } else if(percentage <= 11) {
+            if(random > 75) {
+              gamePlayAi();
+            } else {
+              rightHold2();
+            }
+          }
 
+        } else {
+          if(percentage > 13) {
+            if(random < 80) {
+              gamePlayAi();
+            } else {
+              rightHold2();
+            }
+          }else if(percentage <= 13 && percentage > 10)  {
+            if(random < 70) {
+              gamePlayAi();
+            } else {
+              rightHold2();
+            }
+          } else if(percentage <= 10 && percentage > 8) {
+            if(random < 50) {
+              gamePlayAi();
+            } else {
+              rightHold2();
+            }
+          } else if(percentage <= 8) {
+            if(random < 35) {
+              gamePlayAi();
+            } else {
+              rightHold2();
+            }
+          }
 
-
-
-
-      }else if(playerToWin > 20) {
+        }
 
 
       }
 
-
-
-
-
-
-
-    } else if (aiScore > player1Score){
+    } else {
+      gamePlayAi();
+    }
 
 
 
     }
-  }
+
 
   if(responses > 12) {
     $('#aiResponses li').first().remove();
@@ -644,7 +829,7 @@ function easy() {
 function gamePlayAi() {
 
   var stringArray2;
-  winScore = 25;
+  winScore = 50;
   var aiPlayerScore = 0;
   var firstPlayerScore = 0;
   var a = 0;
