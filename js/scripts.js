@@ -577,14 +577,22 @@ function medium() {
       if(aiScore < scoreToGo) {
         if(percentage < 4) {
           if(random > 8) {
+            $("#aiResponses").append("<li class='list'>" + "Rolling!" + "</li>");
+            responses = responses + 1;
             gamePlayAi();
           } else {
+            $("#aiResponses").append("<li class='list'>" + "Holding! Your turn!" + "</li>");
+            responses = responses + 1;
             rightHold2();
           }
         } else {
           if(random > 20) {
+            $("#aiResponses").append("<li class='list'>" + "Rolling!" + "</li>");
+            responses = responses + 1;
             gamePlayAi();
           } else {
+            $("#aiResponses").append("<li class='list'>" + "Holding! Your turn!" + "</li>");
+            responses = responses + 1;
             rightHold2();
           }
         }
@@ -593,52 +601,84 @@ function medium() {
         if(playerToWin < 20) {
           if(percentage > 17.5) {
             if(random < 98) {
+              $("#aiResponses").append("<li class='list'>" + "Rolling!" + "</li>");
+              responses = responses + 1;
               gamePlayAi();
             } else {
+              $("#aiResponses").append("<li class='list'>" + "Holding! Your turn!" + "</li>");
+              responses = responses + 1;
               rightHold2();
             }
           }else if(percentage <= 17.5 && percentage > 17)  {
             if(random < 90) {
+              $("#aiResponses").append("<li class='list'>" + "Rolling!" + "</li>");
+              responses = responses + 1;
               gamePlayAi();
             } else {
+              $("#aiResponses").append("<li class='list'>" + "Holding! Your turn!" + "</li>");
+              responses = responses + 1;
               rightHold2();
             }
           } else if(percentage <= 17 && percentage > 16.0) {
             if(random < 80) {
+              $("#aiResponses").append("<li class='list'>" + "Rolling!" + "</li>");
+              responses = responses + 1;
               gamePlayAi();
             } else {
+              $("#aiResponses").append("<li class='list'>" + "Holding! Your turn!" + "</li>");
+              responses = responses + 1;
               rightHold2();
             }
           } else if(percentage <= 16.0) {
             if(random < 70) {
+              $("#aiResponses").append("<li class='list'>" + "Rolling!" + "</li>");
+              responses = responses + 1;
               gamePlayAi();
             } else {
+              $("#aiResponses").append("<li class='list'>" + "Holding! Your turn!" + "</li>");
+              responses = responses + 1;
               rightHold2();
             }
           }
         }else if(playerToWin >= 20 && playerToWin < 30) {
           if(percentage > 17) {
             if(random < 95) {
+              $("#aiResponses").append("<li class='list'>" + "Rolling!" + "</li>");
+              responses = responses + 1;
               gamePlayAi();
             } else {
+              $("#aiResponses").append("<li class='list'>" + "Holding! Your turn!" + "</li>");
+              responses = responses + 1;
               rightHold2();
             }
           }else if(percentage <= 17 && percentage > 16)  {
             if(random < 85) {
+              $("#aiResponses").append("<li class='list'>" + "Rolling!" + "</li>");
+              responses = responses + 1;
               gamePlayAi();
             } else {
+              $("#aiResponses").append("<li class='list'>" + "Holding! Your turn!" + "</li>");
+              responses = responses + 1;
               rightHold2();
             }
           } else if(percentage <= 16 && percentage > 14) {
             if(random < 75) {
+              $("#aiResponses").append("<li class='list'>" + "Rolling!" + "</li>");
+              responses = responses + 1;
               gamePlayAi();
             } else {
+              $("#aiResponses").append("<li class='list'>" + "Holding! Your turn!" + "</li>");
+              responses = responses + 1;
               rightHold2();
             }
           } else if(percentage <= 14) {
             if(random < 65) {
+              $("#aiResponses").append("<li class='list'>" + "Rolling!" + "</li>");
+              responses = responses + 1;
               gamePlayAi();
             } else {
+              $("#aiResponses").append("<li class='list'>" + "Holding! Your turn!" + "</li>");
+              responses = responses + 1;
               rightHold2();
             }
           }
@@ -646,26 +686,42 @@ function medium() {
         } else {
           if(percentage > 17) {
             if(random < 80) {
+              $("#aiResponses").append("<li class='list'>" + "Rolling!" + "</li>");
+              responses = responses + 1;
               gamePlayAi();
             } else {
+              $("#aiResponses").append("<li class='list'>" + "Holding! Your turn!" + "</li>");
+              responses = responses + 1;
               rightHold2();
             }
           }else if(percentage <= 17 && percentage > 15)  {
             if(random < 70) {
+              $("#aiResponses").append("<li class='list'>" + "Rolling!" + "</li>");
+              responses = responses + 1;
               gamePlayAi();
             } else {
+              $("#aiResponses").append("<li class='list'>" + "Holding! Your turn!" + "</li>");
+              responses = responses + 1;
               rightHold2();
             }
           } else if(percentage <= 15 && percentage > 13) {
             if(random < 65) {
+              $("#aiResponses").append("<li class='list'>" + "Rolling!" + "</li>");
+              responses = responses + 1;
               gamePlayAi();
             } else {
+              $("#aiResponses").append("<li class='list'>" + "Holding! Your turn!" + "</li>");
+              responses = responses + 1;
               rightHold2();
             }
           } else if(percentage <= 13) {
             if(random < 65) {
+              $("#aiResponses").append("<li class='list'>" + "Rolling!" + "</li>");
+              responses = responses + 1;
               gamePlayAi();
             } else {
+              $("#aiResponses").append("<li class='list'>" + "Holding! Your turn!" + "</li>");
+              responses = responses + 1;
               rightHold2();
             }
           }
@@ -680,52 +736,84 @@ function medium() {
         if(aiToWin < 20) {
           if(percentage > 15) {
             if(random < 65) {
+              $("#aiResponses").append("<li class='list'>" + "Rolling!" + "</li>");
+              responses = responses + 1;
               gamePlayAi();
             } else {
+              $("#aiResponses").append("<li class='list'>" + "Holding! Your turn!" + "</li>");
+              responses = responses + 1;
               rightHold2();
             }
           }else if(percentage <= 15 && percentage > 13)  {
             if(random < 70) {
+              $("#aiResponses").append("<li class='list'>" + "Rolling!" + "</li>");
+              responses = responses + 1;
               gamePlayAi();
             } else {
+              $("#aiResponses").append("<li class='list'>" + "Holding! Your turn!" + "</li>");
+              responses = responses + 1;
               rightHold2();
             }
           } else if(percentage <= 12 && percentage > 9) {
             if(random < 60) {
+              $("#aiResponses").append("<li class='list'>" + "Rolling!" + "</li>");
+              responses = responses + 1;
               gamePlayAi();
             } else {
+              $("#aiResponses").append("<li class='list'>" + "Holding! Your turn!" + "</li>");
+              responses = responses + 1;
               rightHold2();
             }
           } else if(percentage < 9) {
             if(random < 55) {
+              $("#aiResponses").append("<li class='list'>" + "Rolling!" + "</li>");
+              responses = responses + 1;
               gamePlayAi();
             } else {
+              $("#aiResponses").append("<li class='list'>" + "Holding! Your turn!" + "</li>");
+              responses = responses + 1;
               rightHold2();
             }
           }
         }else if(aiToWin >= 20 && aiToWin < 30) {
           if(percentage > 13) {
             if(random > 25) {
+              $("#aiResponses").append("<li class='list'>" + "Rolling!" + "</li>");
+              responses = responses + 1;
               gamePlayAi();
             } else {
+              $("#aiResponses").append("<li class='list'>" + "Holding! Your turn!" + "</li>");
+              responses = responses + 1;
               rightHold2();
             }
           }else if(percentage <= 13 && percentage > 12)  {
             if(random > 35) {
+              $("#aiResponses").append("<li class='list'>" + "Rolling!" + "</li>");
+              responses = responses + 1;
               gamePlayAi();
             } else {
+              $("#aiResponses").append("<li class='list'>" + "Holding! Your turn!" + "</li>");
+              responses = responses + 1;
               rightHold2();
             }
           } else if(percentage <= 12 && percentage > 11) {
             if(random > 64) {
+              $("#aiResponses").append("<li class='list'>" + "Rolling!" + "</li>");
+              responses = responses + 1;
               gamePlayAi();
             } else {
+              $("#aiResponses").append("<li class='list'>" + "Holding! Your turn!" + "</li>");
+              responses = responses + 1;
               rightHold2();
             }
           } else if(percentage <= 11) {
             if(random > 75) {
+              $("#aiResponses").append("<li class='list'>" + "Rolling!" + "</li>");
+              responses = responses + 1;
               gamePlayAi();
             } else {
+              $("#aiResponses").append("<li class='list'>" + "Holding! Your turn!" + "</li>");
+              responses = responses + 1;
               rightHold2();
             }
           }
@@ -733,26 +821,42 @@ function medium() {
         } else {
           if(percentage > 13) {
             if(random < 80) {
+              $("#aiResponses").append("<li class='list'>" + "Rolling!" + "</li>");
+              responses = responses + 1;
               gamePlayAi();
             } else {
+              $("#aiResponses").append("<li class='list'>" + "Holding! Your turn!" + "</li>");
+              responses = responses + 1;
               rightHold2();
             }
           }else if(percentage <= 13 && percentage > 10)  {
             if(random < 70) {
+              $("#aiResponses").append("<li class='list'>" + "Rolling!" + "</li>");
+              responses = responses + 1;
               gamePlayAi();
             } else {
+              $("#aiResponses").append("<li class='list'>" + "Holding! Your turn!" + "</li>");
+              responses = responses + 1;
               rightHold2();
             }
           } else if(percentage <= 10 && percentage > 8) {
             if(random < 50) {
+              $("#aiResponses").append("<li class='list'>" + "Rolling!" + "</li>");
+              responses = responses + 1;
               gamePlayAi();
             } else {
+              $("#aiResponses").append("<li class='list'>" + "Holding! Your turn!" + "</li>");
+              responses = responses + 1;
               rightHold2();
             }
           } else if(percentage <= 8) {
             if(random < 35) {
+              $("#aiResponses").append("<li class='list'>" + "Rolling!" + "</li>");
+              responses = responses + 1;
               gamePlayAi();
             } else {
+              $("#aiResponses").append("<li class='list'>" + "Holding! Your turn!" + "</li>");
+              responses = responses + 1;
               rightHold2();
             }
           }
@@ -763,6 +867,8 @@ function medium() {
       }
 
     } else {
+      $("#aiResponses").append("<li class='list'>" + "Rolling!" + "</li>");
+      responses = responses + 1;
       gamePlayAi();
     }
 
